@@ -1,0 +1,86 @@
+.human{
+    border-bottom: 2px solid #737373;
+    border-right: 2px solid #737373;
+    background: #D6D6D6;
+    border-bottom-right-radius: 25px;
+    box-shadow: -10px 10px 10px 1px #aaaaaa;
+}
+.pc{
+    border-bottom: 2px solid #737373;
+    border-left: 2px solid #737373;
+    background: #D6D6D6;
+    border-bottom-left-radius: 25px;
+    box-shadow: 10px 10px 10px 1px #aaaaaa;
+}
+.displayedName{
+    text-align: center;
+    font-style: bold;
+}
+.transformable {
+    -webkit-transition: height 100ms auto;
+    -moz-transition: height 100ms auto;
+    -o-transition: height 100ms auto;
+    -ms-transition: height 100ms auto;
+    transition: height 100ms auto;
+
+}
+.small {
+    height:150px;
+    width: 150px;
+    line-height: 150px;
+    font-size: 20px;
+    color: dimgrey;
+}
+.big {
+    height:250px;
+    width: 250px;
+    line-height: 250px;
+    font-size: 30px;
+    font-weight: 600;
+    color: black;
+}
+.content{
+    margin-top: 100px;
+}
+.contentHolder{
+    width: 100%;
+    margin: 10px auto;
+    position: relative;
+    text-align:center;
+}
+.letters{
+    line-height: 120px;
+    font-size: 45px;
+    font-weight: 600;
+    width: 80px;
+    height: 120px;
+    background: #D6D6D6;
+    border: 2px solid #737373;
+    display:inline-block;
+    margin: 10px;
+}
+.letterInput{
+    font-size:50px;
+    width: 50px;
+}
+
+.style-1 input[type="text"] {
+    padding: 10px;
+    border: solid 1px #dcdcdc;
+    transition: box-shadow 0.3s, border 0.3s;
+}
+.style-1 input[type="text"]:focus,
+.style-1 input[type="text"].focus {
+    border: solid 1px #707070;
+    box-shadow: 0 0 5px 1px #969696;
+}
+
+.playerArea{
+    margin-top: 100px;
+}
+.enterButton{
+    width: auto;
+    font-size:25px;
+    margin-top: -31px;
+    height: 78px;
+}
