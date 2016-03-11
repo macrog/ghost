@@ -8,4 +8,4 @@ ghostApp.controller('AppCtrl', ['$rootScope','$scope', '$http', function ($rootS
         restrict: 'E',
         templateUrl: 'views/wordboard.html'
     };
-});;
+});

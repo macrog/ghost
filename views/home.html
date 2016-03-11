@@ -11,8 +11,10 @@
 </div>
 <div class="row playerArea">
     <div class="text-center">
-        <input type="text" ng-model="submit.letter" class="letterInput" ng-minimum=1 ng-maximum=1>
-        <button class="btn btn-success enterButton" ng-click="addLetter(submit.letter)">Enter</button>
+        <input type="text" ng-model="submit.letter" class="letterInput" maxlength="1">
+        <button class="btn btn-success enterButton" ng-disabled="submit.letter.length !=1" ng-click="addLetter(submit.letter)">Enter</button>
     </div>
-
+</div>
+<div class="row">
+    {{messageBox}}
 </div>
