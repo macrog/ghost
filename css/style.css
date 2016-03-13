@@ -1,21 +1,26 @@
 .human{
-    border-bottom: 2px solid #737373;
-    border-right: 2px solid #737373;
+    border-top: 1px solid #a3a3a3;
+    border-right: 1px solid #a3a3a3;
     background: #D6D6D6;
-    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
     box-shadow: -10px 10px 10px 1px #aaaaaa;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-left: 20%;
 }
 .pc{
-    border-bottom: 2px solid #737373;
-    border-left: 2px solid #737373;
+    border-top: 1px solid #a3a3a3;
+    border-left: 1px solid #a3a3a3;
     background: #D6D6D6;
-    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
     box-shadow: 10px 10px 10px 1px #aaaaaa;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 20%;
 }
-.displayedName{
-    text-align: center;
-    font-style: bold;
-}
+
 .transformable {
     -webkit-transition: height 100ms auto;
     -moz-transition: height 100ms auto;
@@ -28,17 +33,19 @@
     height:150px;
     width: 150px;
     line-height: 150px;
-    font-size: 20px;
+    font-size: 30px;
     color: dimgrey;
-}
+    text-align: center;
+   }
 .big {
     height:250px;
     width: 250px;
     line-height: 250px;
-    font-size: 30px;
+    font-size: 50px;
     font-weight: 600;
     color: black;
-}
+    text-align: center;
+   }
 .content{
     margin-top: 100px;
 }
@@ -48,7 +55,7 @@
     position: relative;
     text-align:center;
 }
-.letters{
+.letters-big{
     line-height: 120px;
     font-size: 45px;
     font-weight: 600;
@@ -59,13 +66,26 @@
     display:inline-block;
     margin: 10px;
 }
+.letters-small{
+    line-height: 100px;
+    font-size: 40px;
+    font-weight: 600;
+    width: 60px;
+    height: 100px;
+    background: #D6D6D6;
+    border: 2px solid #737373;
+    display:inline-block;
+    margin: 5px;
+}
 .letterInput{
     font-size:50px;
-    width: 40px;
+    width: 100px;
+    text-align:center;
 }
 
 .style-1 input[type="text"] {
     padding: 10px;
+   
     border: solid 1px #dcdcdc;
     transition: box-shadow 0.3s, border 0.3s;
 }
@@ -76,11 +96,19 @@
 }
 
 .playerArea{
+    width: 100%;
     margin-top: 100px;
+    display: inline-block; 
+   
+    vertical-align: top;
 }
 .enterButton{
-    width: auto;
+    width: 10%;
     font-size:25px;
-    margin-top: -31px;
+    vertical-align: top;
     height: 78px;
+}
+.logo{
+    width: 100%;
+    height: auto;
 }
