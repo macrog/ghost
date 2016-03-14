@@ -1,15 +1,17 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Ghost game</div>
+    <div class="panel-heading"><h3>Ghost game</h3></div>
     <div class="panel-body">
 
-        Rules of play:
+        <h4>Rules of play:</h4>
         <hr>
-        <p>fooffo</p>
-        <p>fooffo</p>
-        <p>fooffo</p>
-        <p>fooffo</p>
-        <p>fooffo</p>
-        <p>fooffo</p>
+        
+        <p class="rules">
+            In the game of Ghost, two players take turns building up an English word
+            from left to right. Each player adds one letter per turn. The goal is to not
+            complete the spelling of a word: if you add a letter that completes a word
+            (of 4+ letters), or if you add a letter that produces a string that cannot be
+            extended into a word, you lose.
+        </p>
         <div class="col-xs-12" ng-show='selectPlayers'>
             <div class="col-xs-6">
                 <button class="btn btn-success playerSelectBtn" ng-click="selectdPlayer(1)">1 player</button>

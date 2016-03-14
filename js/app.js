@@ -7,12 +7,12 @@ ghostApp.controller('AppCtrl', ['$rootScope', '$scope', '$http', '$uibModal', 'l
         $scope.players.player2 = '';
 
         $scope.open = function () {
-
             var modalInstance = $uibModal.open({
                 animation: true
                 , templateUrl: 'views/welcomeModal.html'
                 , controller: 'ModalInstanceCtrl'
                 , size: 'lg'
+                , keyboard: false
                 , backdrop: 'static'
                 , resolve: {
                     players: function () {
@@ -20,9 +20,8 @@ ghostApp.controller('AppCtrl', ['$rootScope', '$scope', '$http', '$uibModal', 'l
                     }
                 }
             });
-
             modalInstance.result.then(function (selectedItem) {
-                $scope.turnControll ();
+                $scope.turnControll();
             }, function () {
 
             });
@@ -33,28 +32,28 @@ ghostApp.controller('AppCtrl', ['$rootScope', '$scope', '$http', '$uibModal', 'l
             $scope.player1plays = !$scope.player1plays;
 
         };
-        //    laodDic.getDic()
-        //        .then(function(res){
-        //
-        //            var array = res.data.split("\n");
-        //
-        //            for(var i = 0; i <array.length; i++){
-        //                var substring = 'abando';
-        //                if(array[i].indexOf(substring) > -1){
-        //
-        //                    console.log(array[i]);
-        //                }
-        //            }
-        //
-        //            var erliestEnt = _.min(array, function(str){
-        //                if(str.length > 0){
-        //                    var d = str.length;
-        //                    return d;
-        //                }
-        //            });
-        //            var longest = array.sort(function (a, b) { return b.length - a.length; })[0];
-        //        })
-        //        .catch(function(err){debugger});
+            laodDic.getDic()
+                .then(function(res){
+        
+                    var array = res.data.split("\n");
+        
+                    for(var i = 0; i <array.length; i++){
+                        var substring = 'abando';
+                        if(array[i].indexOf(substring) > -1){
+        
+                            console.log(array[i]);
+                        }
+                    }
+        
+                    var erliestEnt = _.min(array, function(str){
+                        if(str.length > 0){
+                            var d = str.length;
+                            return d;
+                        }
+                    });
+                    var longest = array.sort(function (a, b) { return b.length - a.length; })[0];
+                })
+                .catch(function(err){debugger});
         $scope.open();
 }])
     .directive('wordBoard', function () {

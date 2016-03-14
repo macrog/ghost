@@ -121,3 +121,17 @@
 .buttons{
     margin-top: 25px;
 }
+.modal-backdrop{
+    opacity:0.95 !important;
+}
+.modal{
+    display: flex !important;
+    height: 100%;
+}
+.modal .modal-dialog{
+    margin: auto;
+}
+.rules{
+    font-size: 18px; 
+}
+
