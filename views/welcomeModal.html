@@ -1,6 +1,38 @@
 <div class="panel panel-default">
-  <div class="panel-heading">Panel heading without title</div>
-  <div class="panel-body">
-    Panel content
-  </div>
+    <div class="panel-heading">Ghost game</div>
+    <div class="panel-body">
+
+        Rules of play:
+        <hr>
+        <p>fooffo</p>
+        <p>fooffo</p>
+        <p>fooffo</p>
+        <p>fooffo</p>
+        <p>fooffo</p>
+        <p>fooffo</p>
+        <div class="col-xs-12" ng-show='selectPlayers'>
+            <div class="col-xs-6">
+                <button class="btn btn-success playerSelectBtn" ng-click="selectdPlayer(1)">1 player</button>
+            </div>
+            <div class="col-xs-6" >
+                <button class="btn btn-success playerSelectBtn" ng-click="selectdPlayer(2)">2 players</button>
+            </div>
+        </div>
+        <div class="col-xs-12" ng-show='!selectPlayers'>
+            <div ng-if="numberOfPlayers == 1">
+                <label>Player name</label>
+                <input class="form-control"type="text" ng-model="players.player1">
+            </div>
+            <div ng-if="numberOfPlayers == 2">
+                <label>Player 1 name</label>
+                <input class="form-control" type="text" ng-model="players.player1">
+                <label>Player 2 name</label>
+                <input class="form-control" type="text" ng-model="players.player2">
+            </div>
+            <div class="pull-right buttons">
+                <button class="btn btn-default" ng-click="goBack()">BACK</button>
+                <button class="btn btn-success" ng-disabled="disableBTN()" ng-click="ok()">PLAY</button>
+            </div>
+        </div>
+    </div>
 </div>

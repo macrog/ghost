@@ -1,12 +1,41 @@
-ghostApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+ghostApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, players) {
 
-  
+    $scope.players = players;
 
-  $scope.ok = function () {
-    $uibModalInstance.close($scope.selected.item);
-  };
+    $scope.selectPlayers = true;
+    $scope.numberOfPlayers = 0;
+    $scope.selectdPlayer = function(number){
+        $scope.numberOfPlayers = number;
+        $scope.selectPlayers = false;
+    };
 
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
+    $scope.goBack = function(){
+        $scope.players.player1 = '';
+        $scope.players.player2 = '';
+        $scope.numberOfPlayers = 0;
+        $scope.selectPlayers = true;
+    };
+
+    $scope.disableBTN = function(){
+
+        if($scope.numberOfPlayers == 1){
+            if($scope.players.player1.length > 0){
+                return false;
+            }
+        }else if($scope.numberOfPlayers == 2){
+            if($scope.players.player1.length > 0 && $scope.players.player2.length > 0){
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    $scope.ok = function () {
+        debugger;
+        if($scope.numberOfPlayers == 1){
+            $scope.players.player2 = 'PC';
+        }
+        $uibModalInstance.close();
+    };
 });
