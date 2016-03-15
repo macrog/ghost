@@ -8,17 +8,34 @@ app.listen(1234);
 console.log('server running on port 1234');
 
 
-//can it be extened to word
-//is it 4+ letetrs
-//is it a word or can it be extended to one
 app.post('/newWord/:word', function(req, res){
 
     var word = req.params.word;
     console.log('word : ' + word + ' *****');
 
-    check(word);
-    check1();
-    check2();
+    
+    fs.readFile('data/word.lst', function (err, data) {
+        if (err){ 
+            console.log("error");
+            throw err; 
+        }
+       var array = data.split("\n");
+
+        for(var i = 0; i <array.length; i++){
+            var substring = 'why';
+            if(array[i].indexOf(substring) > -1){
+
+                console.log(array[i]);
+            }
+        }
+    });
+    
+    if(word.length >= 4 ){
+        //is it a word or can it be extended to one
+    }else{
+        //can it be extened to word
+    }
+    
 
 
 });
