@@ -34,17 +34,17 @@ ghostApp.controller('AppCtrl', ['$rootScope', '$scope', '$http', '$uibModal', 'l
         };
             laodDic.getDic()
                 .then(function(res){
-        
+
                     var array = res.data.split("\n");
-        
+
                     for(var i = 0; i <array.length; i++){
-                        var substring = 'abando';
+                        var substring = 'why';
                         if(array[i].indexOf(substring) > -1){
-        
+
                             console.log(array[i]);
                         }
                     }
-        
+                debugger;
                     var erliestEnt = _.min(array, function(str){
                         if(str.length > 0){
                             var d = str.length;
