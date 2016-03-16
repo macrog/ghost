@@ -6,7 +6,7 @@ ghostApp.controller('HomeCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.playerName = 'ELizabeth';
 
     $scope.addLetter = function(str){
-
+        debugger;
             if(str.length === 1 && str.match(/[a-z]/i)){
 
                 $scope.lettersArray.push(str);
@@ -16,10 +16,12 @@ ghostApp.controller('HomeCtrl', ['$scope', '$http', function ($scope, $http) {
 
                 $http.post('/newWord/' + $scope.wholeWord)
                     .then(function(response){
+                    debugger;
+                    $scope.message = response.data;
 
                     })
                     .catch(function(error){
-
+                    debugger;
                     });
 
                 //console.log('thats a valid input: ' + str);

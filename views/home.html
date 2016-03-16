@@ -15,12 +15,17 @@
 </div>
 
 <div class="row">
-    <div class="bottom">
+
         <div class="pull-left human transformable" ng-class="{'small':player1plays, 'big':!player1plays}">
             {{players.player1}}
         </div>
+
+        <div class="displayMessage">
+                {{message}}
+        </div>
+
         <div class="pull-right pc transformable" ng-class="{'small':!player1plays, 'big':player1plays}">
             {{players.player2}}
         </div>
-    </div>
+
 </div>

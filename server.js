@@ -1,58 +1,92 @@
 var express = require('express');
 var fs = require('fs');
+var _u = require("underscore");
+
+
 var app = express();
+
+var dictionary = [];
+var possibleWords = [];
+
 
 app.use(express.static(__dirname + '/'));
 
-app.listen(1234);
-console.log('server running on port 1234');
 
+function loadDictionar() {
+    var lineReader = require('readline').createInterface({
+        input: require('fs').createReadStream('data/word.lst')
+    });
+
+    lineReader.on('line', function (line) {
+        dictionary.push(line);
+    });
+}
+
+loadDictionar();
 
 app.post('/newWord/:word', function(req, res){
 
-    var word = req.params.word;
-    console.log('word : ' + word + ' *****');
+    var subString = req.params.word.toLowerCase();
+    var message = ''
 
-    
-    fs.readFile('data/word.lst', function (err, data) {
-        if (err){ 
-            console.log("error");
-            throw err; 
-        }
-       var array = data.split("\n");
-
-        for(var i = 0; i <array.length; i++){
-            var substring = 'why';
-            if(array[i].indexOf(substring) > -1){
-
-                console.log(array[i]);
-            }
-        }
+    possibleWords = _u.filter(dictionary, function(word){
+        return word.toLowerCase().startsWith(subString);
     });
-    
-    if(word.length >= 4 ){
-        //is it a word or can it be extended to one
+
+    var match = _u.find(possibleWords, function(word){
+        return word === subString;
+    });
+
+    if(possibleWords.length === 0){
+        console.log('Not a word on a list - GAME ENDS');
+        message = 'Not a word on a list - GAME ENDS';
     }else{
-        //can it be extened to word
+        console.log(possibleWords);
     }
-    
+
+    if(subString.length >= 4){
+        // is it a word or can it be extended to one
+        console.log(possibleWords);
+        if(match){
+            console.log('Exact match found on a list - GAME ENDS : ' + match);
+            message = 'Exact match found on a list - GAME ENDS : ' + match;
+        }
+    }
+//    lineReader.on('line', function (line) {
+//
+//        if(line.toLowerCase() === word.toLowerCase()){
+//            console.log(line + ' and ' + word + ' are aqual - GAME ENDS HERE !!!');
+//        }
+//        if(line.toLowerCase().startsWith(word.toLowerCase())){
+//            console.log('These words: ' + line + ' starts with ' + word);
+//        }
+//    });
+
+
+//        lineReader.on('line', function (line) {
+//
+//            if(word.length >= 4){
+//                console.log('bigger then 4');
+//            }else{
+//                console.log('smaller then 4');
+//            }
+
+//            if(line.toLowerCase() === word.toLowerCase()){
+//                console.log(line + ' and ' + word + ' are aqual - GAME ENDS HERE !!!');
+//            } else
+//            if(line.toLowerCase().startsWith(word.toLowerCase())){
+//                console.log('These words: ' + line + ' starts with ' + word);
+//            }else{
+//                console.log('MORE THEN 4 LETTERS')
+//            }
+//        });
+
+    res.status(200).send(message);;
 
 
 });
 
-function check(str){
-    var word = "Hello World!";
-    var subString = str;
 
-    if(word.toLowerCase().startsWith(subString.toLowerCase())){
-        console.log('check 1 yessss ' + word + ' starts with ' + str);
-    }
-}
+app.listen(1234);
+console.log('server running on port 1234');
 
-function check1(){
-    console.log('check 2');
-}
-
-function check2(){
-    console.log('check 3');
-}

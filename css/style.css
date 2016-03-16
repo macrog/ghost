@@ -20,7 +20,12 @@
     right: 0;
     margin-right: 20%;
 }
-
+.displayMessage{
+    position: absolute;
+    bottom: 0;
+    margin-left: 25%;
+    margin-bottom: 200px;
+}
 .transformable {
     -webkit-transition: height 100ms auto;
     -moz-transition: height 100ms auto;
@@ -132,6 +137,6 @@
     margin: auto;
 }
 .rules{
-    font-size: 18px; 
+    font-size: 18px;
 }
 
