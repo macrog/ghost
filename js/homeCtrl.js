@@ -11,20 +11,20 @@ ghostApp.controller('HomeCtrl', ['$scope', '$http', function ($scope, $http) {
 
                 $scope.lettersArray.push(str);
                 $scope.wholeWord += str;
-                $scope.submit.letter = '';
-                $scope.turnControll();
+
 
                 $http.post('/newWord/' + $scope.wholeWord)
                     .then(function(response){
-                    debugger;
-                    $scope.message = response.data;
+                        debugger;
+                        $scope.message = response.data;
+                        $scope.submit.letter = '';
+                        $scope.turnControll($scope.wholeWord);
 
                     })
                     .catch(function(error){
-                    debugger;
+                        debugger;
                     });
 
-                //console.log('thats a valid input: ' + str);
             }else{
                 $scope.messageBox = 'Not a letter dude !';
                 $scope.submit.letter = '';

@@ -32,9 +32,12 @@ ghostApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, pl
     };
 
     $scope.ok = function () {
-        debugger;
+
         if($scope.numberOfPlayers == 1){
             $scope.players.player2 = 'PC';
+            $scope.players.number = 1;
+        }else{
+            $scope.players.number = 2;
         }
         $uibModalInstance.close();
     };
