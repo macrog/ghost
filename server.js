@@ -9,7 +9,7 @@ var app = express();
 
 var dictionary = [];
 var possibleWords = [];
-var uniqArray = [];
+var uniqDictionary = [];
 
 app.use(express.static(__dirname + '/'));
 
@@ -33,25 +33,40 @@ function selectUniqWords(){
     for(var i = 0; i < dictionary.length; i ++){
         var word = dictionary[i];
 
-//        if(word.toLowerCase().startsWith('aal')){
-//            console.log('1 ' + word);
-//        }
+//        var match = _u.find(uniqDictionary, function(str){
+//            return str === word;
+//        });
+
+//
+//aa
+//aah
+//aahed
+//aahing
+//aahs
+//aal
+//aalii
+//aaliis
+//aals
 
         if(word.length >= 4){
             var previousWord = dictionary[i-1];
-//            if(word.toLowerCase().startsWith('aal')){
-//            console.log('2 ' + previousWord);
-//            console.log(('3 ' + !word.toLowerCase().startsWith(previousWord)));
-//            console.log('4 ' + !word.toLowerCase().startsWith(uniqArray[uniqArray.length-1]));
-//            }
+
             if(previousWord.length > 4 ){
+
                 if((!word.toLowerCase().startsWith(uniqArray[uniqArray.length-1])) | (!word.toLowerCase().startsWith(previousWord))){
                     uniqArray.push(word);
-                }
+
+
+            }else{
+                uniqDictionary.push(word);
             }
         }
     }
+
     //console.log(uniqArray);
+
+    console.log(uniqDictionary);
+
 };
 
 app.post('/newWord/:word', function(req, res){
@@ -62,7 +77,7 @@ app.post('/newWord/:word', function(req, res){
     possibleWords = _u.filter(dictionary, function(word){
         return word.toLowerCase().startsWith(subString);
     });
-    uniqArray = _u.filter(uniqArray, function(word){
+    uniqDictionary = _u.filter(uniqDictionary, function(word){
         return word.toLowerCase().startsWith(subString);
     });
 
@@ -94,9 +109,10 @@ app.get('/calculateWin/:word', function(req, res){
 
     var curentString = req.params.word.toLowerCase();
 
-    console.log('UniqWords : '  + uniqArray);
-    var total = uniqArray.length;
+    console.log('UniqWords : '  + uniqDictionary);
+    var total = uniqDictionary.length;
     console.log('Total words: '  + total);
+
 
 
 
