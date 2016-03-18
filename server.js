@@ -9,10 +9,97 @@ var app = express();
 
 var dictionary = [];
 var possibleWords = [];
-var uniqDictionary = [];
+var uniqueDictionary = [];
 
 app.use(express.static(__dirname + '/'));
 
+app.post('/newWord/:word', function(req, res){
+
+    var subString = req.params.word.toLowerCase();
+    var resObj = {};
+
+    uniqueDictionary = _u.filter(uniqueDictionary, function(word){
+        return word.toLowerCase().startsWith(subString);
+    });
+
+    var match = _u.find(uniqueDictionary, function(word){
+        return word === subString;
+    });
+
+    if(uniqueDictionary.length === 0){
+        console.log(log('Not a word on a list - GAME ENDS'));
+        resObj = {'message' : 'GAME OVER - ' + subString.toUpperCase() + ' its not a word: ',
+                  'end':true
+                 };
+    }
+
+    if(subString.length >= 4){
+        if(match){
+            console.log(log('Exact match found on a list - GAME ENDS : ' + match));
+            resObj = { 'message' : 'GAME OVER - you completed a spelling of a word: ' + match,
+                        'end':true
+                     };
+        }
+    }
+
+    res.status(200).send(resObj);;
+
+});
+
+app.get('/calcWinGetLetter/:word', function(req, res){
+
+    var currentString = req.params.word.toLowerCase();
+    var resObj = {};
+
+    var total = uniqueDictionary.length;
+
+    var winWords = _u.filter(uniqueDictionary, function(word){
+        return word.length % 2 != 0;
+    });
+
+    var percent = 100 - (winWords.length * 100 / total);
+
+    if(winWords.length === 0){
+        var random = random_character()
+        resObj = {'letter': random};
+        console.log("random_character: " + random);
+    }else{
+        if(percent > 45) {
+            var randomWord = winWords[Math.floor(Math.random() * winWords.length)];
+            var char = randomWord.substring(currentString.length, currentString.length+1);
+            resObj = {'letter':char};
+            console.log("randomWord " +randomWord);
+        }else{
+            var longestWord = _u.max(winWords, function(word){
+                return word.length;
+            });
+            var char = longestWord.substring(currentString.length, currentString.length+1);
+            resObj = {'letter':char};
+            console.log("longestWord " + longestWord);
+        }
+    }
+    res.status(200).send(resObj);
+
+});
+
+//play agin, reset the uniqueDictionary
+app.post('/playAgain', function(req, res){
+    var resObj = {};
+
+    selectUniqueWords();
+
+    resObj = { 'message' : 'Ready to play again. Good Luck',
+              'end':false
+             };
+
+    res.status(200).send(resObj);
+});
+
+
+
+app.listen(portNumber);
+console.log(log('Server running on port ' + portNumber));
+//open('http://localhost:' + portNumber );
 
 function loadDictionar() {
     //create a read line interface with a stream
@@ -21,143 +108,59 @@ function loadDictionar() {
     });
     //lineReader goes async
     lineReader.on('line', function (line) {
-        dictionary.push(line);
+        dictionary.push(line.toLowerCase());
     });
-    //lineReader finish, run function to select a uniq words only.
+    //lineReader finish, run function to select a unique words only.
     lineReader.on('close', function(){
-        selectUniqWords();
+        selectUniqueWords();
     });
 };
-function selectUniqWords(){
-    // loop through the array and get only the uniq words out.
+function selectUniqueWords(){
+    // loop through the array and get only the unique words out.
     for(var i = 0; i < dictionary.length; i ++){
         var word = dictionary[i];
-
-//        var match = _u.find(uniqDictionary, function(str){
-//            return str === word;
-//        });
-
-//
-//aa
-//aah
-//aahed
-//aahing
-//aahs
-//aal
-//aalii
-//aaliis
-//aals
-
-        if(word.length >= 4){
+        if (word.length >= 4) {
             var previousWord = dictionary[i-1];
 
-            if(previousWord.length > 4 ){
+            if(!previousWord){
+                //console.log('No previous word');
+                previousWord = '';
+            }
 
-                if((!word.toLowerCase().startsWith(uniqArray[uniqArray.length-1])) | (!word.toLowerCase().startsWith(previousWord))){
-                    uniqArray.push(word);
-
-
-            }else{
-                uniqDictionary.push(word);
+            if (previousWord.length > 4 ) {
+                if (!word.startsWith(uniqueDictionary[uniqueDictionary.length - 1])){
+                    uniqueDictionary.push(word);
+                }
+            }else {
+                if(!word.startsWith(uniqueDictionary[uniqueDictionary.length - 1])){
+                    uniqueDictionary.push(word);
+                }
             }
         }
     }
+    // just for a stats, check percentage of odd and even lenght of a uniqueDictionary words.
+    var odd = _u.filter(uniqueDictionary, function(word){
+        return word.length % 2 !== 0;
+    });
+    var oddPercent = decimalDisplay(odd.length * 100 / uniqueDictionary.length);
 
-    //console.log(uniqArray);
+    var even = _u.filter(uniqueDictionary, function(word){
+        return word.length % 2 === 0;
+    });
+    var evenPercent = decimalDisplay(even.length * 100 / uniqueDictionary.length);
 
-    console.log(uniqDictionary);
 
+    console.log(log('uniqueDictionary created, ' + uniqueDictionary.length + ' words available. ' + odd.length + ' (' + oddPercent +'%) words with odd lenght of a word and ' + even.length + ' (' + evenPercent +'%) even lenght. Have fun!'));
 };
-
-app.post('/newWord/:word', function(req, res){
-
-    var subString = req.params.word.toLowerCase();
-    var message = '';
-
-    possibleWords = _u.filter(dictionary, function(word){
-        return word.toLowerCase().startsWith(subString);
-    });
-    uniqDictionary = _u.filter(uniqDictionary, function(word){
-        return word.toLowerCase().startsWith(subString);
-    });
-
-    var match = _u.find(possibleWords, function(word){
-        return word === subString;
-    });
-
-    if(possibleWords.length === 0){
-        console.log('Not a word on a list - GAME ENDS');
-        message = 'Not a word on a list - GAME ENDS';
-    }else{
-        console.log(possibleWords);
-    }
-
-    if(subString.length >= 4){
-        // is it a word or can it be extended to one
-        console.log(possibleWords);
-        if(match){
-            console.log('Exact match found on a list - GAME ENDS : ' + match);
-            message = 'Exact match found on a list - GAME ENDS : ' + match;
-        }
-    }
-
-    res.status(200).send(message);;
-
-});
-
-app.get('/calculateWin/:word', function(req, res){
-
-    var curentString = req.params.word.toLowerCase();
-
-    console.log('UniqWords : '  + uniqDictionary);
-    var total = uniqDictionary.length;
-    console.log('Total words: '  + total);
-
-
-
-
-    var winWords = _u.filter(uniqArray, function(word){
-        return word.length % 2 != 0;
-    });
-    console.log('win words: '  + winWords.length);
-    var percetage = winWords.length * 100 / total;
-    console.log('Winnnign words: ' + winWords);
-    console.log('percetage: '  + percetage);
-    var obj = {'percentage:' : percetage};
-
-    res.status(200).send(obj);;
-
-});
-
-//app.get('/getLetter', function(req, res){
-//    var message = '';
-//
-//    res.status(200).send(message);;
-//
-//});
-
-//_u.each(dictionary, function(word){
-//    console.log('3');
-//    if(word.length >= 4){
-//        var match = _u.find(possibleWords, function(word){
-//            return word === subString;
-//        });
-//
-//        if(match){
-//            _u.each(dictionary, function(uniq){
-//
-//                if(uniq.toLowerCase().startsWith(match)){
-//                    console.log(uniq);
-//                }
-//            });
-//        }
-//    }
-//});
-
-
-app.listen(portNumber);
-console.log('server running on port ' + portNumber);
-//open('http://localhost:' + portNumber );
-
+function log(str){
+    return 'NODE SERVER: \x1b[31m ' + str + ' \x1b[30m';
+};
+function decimalDisplay(number){
+    return parseFloat(Math.round(number * 100) / 100).toFixed(2);
+};
+function random_character() {
+    var chars = 'abcdefghijklmnopqrstuvwxyz';
+    return chars.substr(Math.floor(Math.random() * 26), 1);
+};
 loadDictionar();
 

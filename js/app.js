@@ -1,11 +1,15 @@
 var ghostApp = angular.module('ghostApp', ['ui.router', 'ui.bootstrap']);
 
-ghostApp.controller('AppCtrl', ['$rootScope', '$scope', '$http', '$uibModal', function ($rootScope, $scope, $http, $uibModal) {
-        $scope.player1plays = true;
+ghostApp.controller('AppCtrl', ['$scope', '$http', '$uibModal', '$window', function ($scope, $http, $uibModal, $window) {
+
         $scope.players = {};
         $scope.players.player1 = '';
         $scope.players.player2 = '';
         $scope.players.number = '';
+        $scope.players.currentPlayer = '';
+        $scope.game = {};
+        $scope.game.end = false;
+        $scope.game.player1plays = true;
 
         $scope.open = function () {
             var modalInstance = $uibModal.open({
@@ -22,56 +26,11 @@ ghostApp.controller('AppCtrl', ['$rootScope', '$scope', '$http', '$uibModal', fu
                 }
             });
             modalInstance.result.then(function (selectedItem) {
-                $scope.turnControll();
+                $scope.game.turnControll();
             }, function () {
 
             });
         };
-
-        $scope.turnControll = function (word) {
-            $scope.player1plays = !$scope.player1plays;
-            if($scope.players.number != 2){
-                if($scope.player1plays){
-                    //computer move
-                    debugger;
-                    //check a chances to win
-                    $http.get('/calculateWin/' + word)
-                        .then(function(res){
-                            debugger;
-                            console.log('calculate win ok');
-                        })
-                        .catch(function(err){
-                            debugger
-                            console.error('calculate win faild');
-                        });
-                 //if low get the fastes win
-                 //if high play longest possible word
-                }
-            }
-        };
-
-//        laodDic.getDic()
-//            .then(function(res){
-//
-//                var array = res.data.split("\n");
-//
-//                for(var i = 0; i <array.length; i++){
-//                    var substring = 'why';
-//                    if(array[i].indexOf(substring) > -1){
-//
-//                        console.log(array[i]);
-//                    }
-//                }
-//            debugger;
-//                var erliestEnt = _.min(array, function(str){
-//                    if(str.length > 0){
-//                        var d = str.length;
-//                        return d;
-//                    }
-//                });
-//                var longest = array.sort(function (a, b) { return b.length - a.length; })[0];
-//            })
-//            .catch(function(err){debugger});
         //When loading the first time open welcome modal with game rules and player(s) input(s) name(s)
         $scope.open();
     }])
@@ -119,22 +78,3 @@ ghostApp.controller('AppCtrl', ['$rootScope', '$scope', '$http', '$uibModal', fu
             }
         };
     });
-//    .service('laodDic', ['$http', '$q', function ($http, $q) {
-//
-//        var dic = {
-//            getDic: function () {
-//                var defferd = $q.defer();
-//                $http.get('data/word.lst')
-//                    .then(function (response) {
-//                        defferd.resolve(response);
-//                    })
-//                    .catch(function (error) {
-//                        defferd.reject(error);
-//                    });
-//
-//                return defferd.promise;
-//            }
-//        };
-//        return dic;
-
-//}]);

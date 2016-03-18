@@ -6,7 +6,7 @@
 </div>
 <div class="row playerArea">
     <div class="text-center">
-        <input type="text" ng-model="submit.letter" class="letterInput" maxlength="1" ng-trim="false" capitalize character-only>
+        <input type="text" ng-model="submit.letter" class="letterInput" maxlength="1" ng-trim="false" capitalize character-only ng-disabled="game.end">
         <button class="btn btn-success enterButton" ng-disabled="submit.letter.length !=1" ng-click="addLetter(submit.letter)">Enter</button>
     </div>
 </div>
@@ -16,15 +16,18 @@
 
 <div class="row">
 
-        <div class="pull-left human transformable" ng-class="{'small':player1plays, 'big':!player1plays}">
+    <div class="pull-left human transformable" ng-class="{'small':game.player1plays, 'big':!game.player1plays}">
             {{players.player1}}
         </div>
 
         <div class="displayMessage">
-                {{message}}
+            <div ng-if="game.end">
+                <textarea ng-disabled="true">{{message}}</textarea>
+                <button class="btn btn-success buttonTextArea" ng-click="playAgain();">PLAY AGAIN</button>
+            </div>
         </div>
 
-        <div class="pull-right pc transformable" ng-class="{'small':!player1plays, 'big':player1plays}">
+    <div class="pull-right pc transformable" ng-class="{'small':!game.player1plays, 'big':game.player1plays}">
             {{players.player2}}
         </div>
 
