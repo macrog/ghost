@@ -45,13 +45,13 @@ function selectUniqWords(){
 //            console.log('4 ' + !word.toLowerCase().startsWith(uniqArray[uniqArray.length-1]));
 //            }
             if(previousWord.length > 4 ){
-                if((!word.toLowerCase().startsWith(previousWord)) && (!word.toLowerCase().startsWith(uniqArray[uniqArray.length-1]))){
+                if((!word.toLowerCase().startsWith(uniqArray[uniqArray.length-1])) | (!word.toLowerCase().startsWith(previousWord))){
                     uniqArray.push(word);
                 }
             }
         }
     }
-    console.log(uniqArray);
+    //console.log(uniqArray);
 };
 
 app.post('/newWord/:word', function(req, res){
@@ -101,7 +101,7 @@ app.get('/calculateWin/:word', function(req, res){
 
 
     var winWords = _u.filter(uniqArray, function(word){
-        return word.length % 2 === 0;
+        return word.length % 2 != 0;
     });
     console.log('win words: '  + winWords.length);
     var percetage = winWords.length * 100 / total;
