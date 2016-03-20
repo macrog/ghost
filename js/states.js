@@ -18,11 +18,6 @@ ghostApp.config(function ($stateProvider, $urlRouterProvider) {
     })
     .run(function ($state, $rootScope) {
         $rootScope.$on('$stateChangeStart', function (e, to) {
-            console.log("$stateChangeStart");
-            if (to.data && to.data.requiresLogin) {
-                console.log("unauthorized");
-                e.preventDefault();
-                $state.go('login');
-            }
+            console.log("$stateChangeStart");            
         });
     });

@@ -1,4 +1,4 @@
-var ghostApp = angular.module('ghostApp', ['ui.router', 'ui.bootstrap']);
+var ghostApp = angular.module('ghostApp', ['ui.router', 'ui.bootstrap', 'ngAnimate']);
 
 ghostApp.controller('AppCtrl', ['$scope', '$http', '$uibModal', '$window', function ($scope, $http, $uibModal, $window) {
 

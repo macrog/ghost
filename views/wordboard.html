@@ -1,5 +1,5 @@
-<div class="contentHolder">
-    <div ng-class="{'letters-big':lettersArray.length < 11, 'letters-small':lettersArray.length >= 11}" ng-repeat="letter in lettersArray track by $index">
+<div class="contentHolder" ng-show="lettersArray.length > 0">
+    <div ng-class="{'letters-big':lettersArray.length < 11, 'letters-small':lettersArray.length >= 11}" ng-repeat="letter in lettersArray track by $index" class="wordBoard">
         {{letter.toUpperCase()}}
     </div>
 </div>

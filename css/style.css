@@ -1,41 +1,66 @@
+body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+#header {   
+    height: 200px;
+}
+#body {   
+    padding-bottom:250px;   /* Height of the footer */
+}
+#footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:250px;   /* Height of the footer */   
+}
+.containerMain{
+    background: url(../img/ghost-bg.jpg) no-repeat top center fixed; 
+    background-color: #aaaaaa;
+    -webkit-background-size: 63% 100%;
+    -moz-background-size: 63% 100%;
+    -o-background-size: 63% 100%;
+    background-size: 63% 100%;
+    min-height:100%;
+    position:relative;
+    box-shadow: 12px 0 15px -4px rgba(170, 170, 170, 1), -12px 0 15px -4px rgba(170, 170, 170, 1);   
+}
 .human{
     border-top: 1px solid #a3a3a3;
     border-right: 1px solid #a3a3a3;
     background: #D6D6D6;
-    border-top-right-radius: 25px;
-    box-shadow: -10px 10px 10px 1px #aaaaaa;
+    border-top-right-radius: 25px;   
     position: absolute;
     bottom: 0;
-    left: 0;
-    margin-left: 20%;
+    left: 0;    
 }
 .pc{
     border-top: 1px solid #a3a3a3;
     border-left: 1px solid #a3a3a3;
     background: #D6D6D6;
-    border-top-left-radius: 25px;
-    box-shadow: 10px 10px 10px 1px #aaaaaa;
+    border-top-left-radius: 25px;    
     position: absolute;
     bottom: 0;
-    right: 0;
-    margin-right: 20%;
+    right: 0;    
 }
 .displayMessage{
-    width: 50%;
-    bottom: 0;
-    position: absolute;
-    margin-bottom: 50px;
+    text-align: center;
 }
 .displayMessage textarea{
-    font-size: 20px;
-    font-weight: 600;
-    margin-left: 30%;
-    width: 60%;
+    text-shadow: 2px 2px 0px #eee, 4px 4px 0px #707070;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;   
+    width: calc(100% - 600px);
+    height: 140px;
     resize: none;
-    border: 1px solid #e9e9e9;
+    border: none;    
+    line-height: 40px;
+    background-color: transparent;
+    padding: 10px;
 }
-.buttonTextArea{
-    margin-left: 55%;
+.buttonTextArea{    
     margin-top: 20px;
 }
 .transformable {
@@ -58,7 +83,7 @@
     height:250px;
     width: 250px;
     line-height: 250px;
-    font-size: 50px;
+    font-size: 45px;
     font-weight: 600;
     color: black;
     text-align: center;
@@ -80,8 +105,8 @@
     height: 120px;
     background: #D6D6D6;
     border: 2px solid #737373;
-    display:inline-block;
-    margin: 10px;
+    display:inline-block;   
+    margin-left: 10px;
 }
 .letters-small{
     line-height: 100px;
@@ -92,11 +117,12 @@
     background: #D6D6D6;
     border: 2px solid #737373;
     display:inline-block;
-    margin: 5px;
+    margin-left: 5px;
 }
 .welcomeName{
     height: 50px;
     font-size: 35px;
+    width: inherit;
 }
 .letterInput{
     font-size:50px;
@@ -154,7 +180,48 @@
 .modal .modal-dialog{
     margin: auto;
 }
+.rulesTitle{
+    margin-left: 15px;
+}
 .rules{
     font-size: 18px;
+    margin: 15px;
+}
+.modalButtons{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.panel-default{
+    margin-bottom: 0;
+}
+.inputPlayers{
+    margin-left: 15px;    
+}
+.showWordBoard {
+  height: 100px;
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.ng-hide-add, .ng-hide-remove {
+    /* ensure visibility during the transition */
+    display: block !important; /* yes, important */
+}
+.messageSlideUp {
+    transition: .9s linear all;
+    height: 200px;
+    overflow: hidden;
+}
+.messageSlideUp.ng-hide {
+    height:0;
 }
 
+.wordBoard.ng-enter {
+    -webkit-transition: 2s;
+    transition: 2s;
+    opacity: 0;
+}
+.wordBoard.ng-enter-active {    
+    opacity: 1;
+}

@@ -28,16 +28,18 @@ app.post('/newWord/:word', function(req, res){
 
     if(uniqueDictionary.length === 0){
         console.log(log('Not a word on a list - GAME ENDS'));
-        resObj = {'message' : 'GAME OVER - ' + subString.toUpperCase() + ' its not a word: ',
-                  'end':true
+        resObj = {'message' : 'GAME OVER\n' + subString.toUpperCase() + ' - its not a word\n',
+                  'end':true,
+                  'definition':false
                  };
     }
 
     if(subString.length >= 4){
         if(match){
             console.log(log('Exact match found on a list - GAME ENDS : ' + match));
-            resObj = { 'message' : 'GAME OVER - you completed a spelling of a word: ' + match,
-                        'end':true
+            resObj = { 'message' : 'GAME OVER\n You completed a spelling of a word: ' + match.toUpperCase() + '\n',
+                        'end':true,
+                        'definition':true
                      };
         }
     }
@@ -95,12 +97,12 @@ app.post('/playAgain', function(req, res){
     res.status(200).send(resObj);
 });
 
-
-
 app.listen(portNumber);
 console.log(log('Server running on port ' + portNumber));
-//open('http://localhost:' + portNumber );
+open('http://localhost:' + portNumber );
 
+
+/**************** PRIVATE FUNCTIONS ***************/
 function loadDictionar() {
     //create a read line interface with a stream
     var lineReader = require('readline').createInterface({
@@ -153,7 +155,7 @@ function selectUniqueWords(){
     console.log(log('uniqueDictionary created, ' + uniqueDictionary.length + ' words available. ' + odd.length + ' (' + oddPercent +'%) words with odd lenght of a word and ' + even.length + ' (' + evenPercent +'%) even lenght. Have fun!'));
 };
 function log(str){
-    return 'NODE SERVER: \x1b[31m ' + str + ' \x1b[30m';
+    return 'NODE SERVER: \x1b[31m ' + str + ' \x1b[37m';
 };
 function decimalDisplay(number){
     return parseFloat(Math.round(number * 100) / 100).toFixed(2);
@@ -162,5 +164,6 @@ function random_character() {
     var chars = 'abcdefghijklmnopqrstuvwxyz';
     return chars.substr(Math.floor(Math.random() * 26), 1);
 };
+//on server start trigger dictionary load
 loadDictionar();
 
