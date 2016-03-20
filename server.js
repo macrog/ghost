@@ -37,7 +37,7 @@ app.post('/newWord/:word', function(req, res){
     if(subString.length >= 4){
         if(match){
             console.log(log('Exact match found on a list - GAME ENDS : ' + match));
-            resObj = { 'message' : 'GAME OVER\n You completed a spelling of a word: ' + match.toUpperCase() + '\n',
+            resObj = { 'message' : 'GAME OVER\n You have completed the spelling of: ' + match.toUpperCase() + '\n',
                         'end':true,
                         'definition':true
                      };
