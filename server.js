@@ -106,7 +106,7 @@ open('http://localhost:' + portNumber );
 function loadDictionar() {
     //create a read line interface with a stream
     var lineReader = require('readline').createInterface({
-        input: require('fs').createReadStream('data/word.lst')
+        input: require('fs').createReadStream('data/words.lst')
     });
     //lineReader goes async
     lineReader.on('line', function (line) {

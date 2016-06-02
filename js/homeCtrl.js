@@ -1,5 +1,4 @@
-ghostApp.controller('HomeCtrl', ['$scope', '$http', function ($scope, $http) {
-    //console.log("Hello World from controller");
+ghostApp.controller('HomeCtrl', ['$scope', '$http', 'httpService', function ($scope, $http, httpService) {
     $scope.wholeWord = '';
     $scope.lettersArray = [];
     $scope.submit = {};
@@ -11,11 +10,11 @@ ghostApp.controller('HomeCtrl', ['$scope', '$http', function ($scope, $http) {
                 //computer move
                 $scope.players.currentPlayer = $scope.players.player2;
                 //check a chances to win, get back a letter and submit to play
-                $http.get('/calcWinGetLetter/' + word)
+                httpService.calculateWinAndGetLetter(word)
                     .then(function (response) {
-                        //submit a PC letter with randome time 
+                        //submit a PC letter with randome time
                         var randomTime = _.random(1000, 3000);
-                        //console.log(randomTime)                        
+                        //console.log(randomTime)
                         setTimeout(function () {
                             $scope.addLetter(response.data.letter);
                         }, randomTime);
@@ -33,13 +32,11 @@ ghostApp.controller('HomeCtrl', ['$scope', '$http', function ($scope, $http) {
 
     $scope.addLetter = function (str) {
         if (str.length === 1 && str.match(/[a-z]/i)) {
-
             $scope.lettersArray.push(str);
             $scope.wholeWord += str;
 
-            $http.post('/newWord/' + $scope.wholeWord)
+            httpService.addLetter($scope.wholeWord)
                 .then(function (response) {
-
                     $scope.message = response.data.message;
                     $scope.submit.letter = '';
                     if (!response.data.end) {
@@ -48,7 +45,6 @@ ghostApp.controller('HomeCtrl', ['$scope', '$http', function ($scope, $http) {
                         $scope.message += $scope.players.currentPlayer + ' - lose the game!'
                         $scope.game.end = !$scope.game.end;
                     }
-
                 })
                 .catch(function (error) {
                     console.log('ERROR!! newWord function' + JSON.stringify(error));
@@ -60,8 +56,7 @@ ghostApp.controller('HomeCtrl', ['$scope', '$http', function ($scope, $http) {
         }
     };
     $scope.playAgain = function () {
-
-        $http.post('/playAgain')
+        httpService.playAgain()
             .then(function (response) {
                 $scope.submit.letter = '';
                 $scope.wholeWord = '';
