@@ -3,6 +3,18 @@ body {
     padding:0;
     height:100%;
 }
+.containerMain{
+    background: url(../img/ghost-bg.jpg);
+    background-color: #aaaaaa;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: 100% 100%;
+    min-height:100%;
+    width: 100%;
+    position:relative;
+    box-shadow: 12px 0 15px -4px rgba(170, 170, 170, 1), -12px 0 15px -4px rgba(170, 170, 170, 1);
+}
 #header {
     height: 25%;
 }
@@ -10,21 +22,14 @@ body {
     height: 50%;
 }
 #footer {
+    height: 25%;
     position:absolute;
     bottom:0;
     width:100%;
-    height:250px;   /* Height of the footer */
+/*    height:250px;*/
 }
-.containerMain{
-    background: url(../img/ghost-bg.jpg) no-repeat top center fixed;
-    background-color: #aaaaaa;
-    -webkit-background-size: 63% 100%;
-    -moz-background-size: 63% 100%;
-    -o-background-size: 63% 100%;
-    background-size: 63% 100%;
-    min-height:100%;
-    position:relative;
-    box-shadow: 12px 0 15px -4px rgba(170, 170, 170, 1), -12px 0 15px -4px rgba(170, 170, 170, 1);
+.centerContent{
+    height: 50%;
 }
 .human{
     border-top: 1px solid #a3a3a3;
@@ -87,10 +92,8 @@ body {
     font-weight: 600;
     color: black;
     text-align: center;
-   }
-.content{
-    margin-top: 100px;
 }
+
 .contentHolder{
     width: 100%;
     margin: 10px auto;
@@ -142,7 +145,7 @@ body {
 
 .playerArea{
     width: 100%;
-    margin-top: 100px;
+/*    margin-top: 100px;*/
     display: inline-block;
 
     vertical-align: top;
@@ -151,7 +154,7 @@ body {
     margin-top: 10px;
 }
 .enterButton{
-    width: 10%;
+/*    width: 10%;*/
     font-size:25px;
     vertical-align: top;
     height: 78px;
@@ -198,7 +201,7 @@ body {
     margin-left: 15px;
 }
 .showWordBoard {
-  height: 100px;
+/*  height: 100px;*/
   width: 100%;
   position: relative;
   top: 0;
