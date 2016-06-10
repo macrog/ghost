@@ -11,7 +11,7 @@ var dictionary = [];
 var possibleWords = [];
 var uniqueDictionary = [];
 
-app.use(express.static(__dirname + '/'));
+app.use(express.static(__dirname + '/app'));
 
 app.post('/newWord/:word', function(req, res){
 
@@ -106,7 +106,7 @@ open('http://localhost:' + portNumber );
 function loadDictionar() {
     //create a read line interface with a stream
     var lineReader = require('readline').createInterface({
-        input: require('fs').createReadStream('data/words.lst')
+        input: require('fs').createReadStream('app/data/words.lst')
     });
     //lineReader goes async
     lineReader.on('line', function (line) {

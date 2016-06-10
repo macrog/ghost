@@ -1,0 +1,34 @@
+{
+  "name": "ghost",
+  "version": "1.0.0",
+  "description": "simple web app game, add leters to NOT completed a spelling of a word",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "angular-ui-router": "^0.2.18",
+    "express": "^4.13.4",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "open": "^0.0.5",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macrog/ghost.git"
+  },
+  "author": "Maciej Gorczynski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/macrog/ghost/issues"
+  },
+  "homepage": "https://github.com/macrog/ghost#readme"
+}
